@@ -10,7 +10,7 @@ import time
 import numpy as np
 
 from common.numpy_fast import clip, interp
-from cereal import car, messaging
+from cereal import car, messaging, log
 from opendbc.car.common.conversions import Conversions as CV
 from opendbc.car.can_definitions import CanData
 from opendbc.car.car_helpers import can_fingerprint
@@ -31,7 +31,7 @@ CREEP_SPEED = 2.3
 
 MIN_CURVE_SPEED = 32. * CV.KPH_TO_MS
 
-EventName = car.OnroadEvent.EventName
+EventName = log.OnroadEvent.EventName
 ButtonType = car.CarState.ButtonEvent.Type
 
 

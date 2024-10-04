@@ -5,9 +5,8 @@ $Cxx.namespace("cereal");
 
 # ******* events causing controls state machine transition *******
 
-# FIXME: OnroadEvent shouldn't be in car.capnp, but can't immediately
-#        move due to being referenced by structs in this file
-struct OnroadEvent @0x9b1657f34caf3ad3 {
+# IMPORTANT: This struct is to not be modified so old logs can be parsed
+struct OnroadEventDEPRECATED @0x9b1657f34caf3ad3 {
   name @0 :EventName;
 
   # event types
@@ -117,10 +116,6 @@ struct OnroadEvent @0x9b1657f34caf3ad3 {
     personalityChanged @122;
     aeb @123;
 
-    slowingDownSpeed @126;
-    cruiseOn @127;
-    cruiseOff @128;
-
     radarCanErrorDEPRECATED @15;
     communityFeatureDisallowedDEPRECATED @62;
     radarCommIssueDEPRECATED @67;
@@ -161,8 +156,6 @@ struct OnroadEvent @0x9b1657f34caf3ad3 {
 # all speeds in m/s
 
 struct CarState {
-  events @13 :List(OnroadEvent);
-
   # CAN health
   canValid @26 :Bool;       # invalid counter/checksums
   canTimeout @40 :Bool;     # CAN bus dropped out
@@ -211,6 +204,7 @@ struct CarState {
   carFaultedNonCritical @47 :Bool;  # some ECU is faulted, but car remains controllable
   espActive @51 :Bool;
   vehicleSensorsInvalid @52 :Bool;  # invalid steering angle readings, etc.
+  lowSpeedAlert @56 :Bool;  # lost steering control due to a dynamic min steering speed
 
   # cruise state
   cruiseState @10 :CruiseState;
@@ -242,7 +236,7 @@ struct CarState {
   cumLagMs @50 :Float32;
 
   # neokii
-  exState @56 :ExState;
+  exState @57 :ExState;
 
   struct ExState {
     vCruiseKph @0 :Float32;
@@ -321,11 +315,12 @@ struct CarState {
   }
 
   # deprecated
-  errorsDEPRECATED @0 :List(OnroadEvent.EventName);
+  errorsDEPRECATED @0 :List(OnroadEventDEPRECATED.EventName);
   brakeLights @19 :Bool;
   steeringRateLimitedDEPRECATED @29 :Bool;
   canMonoTimesDEPRECATED @12: List(UInt64);
   canRcvTimeoutDEPRECATED @49 :Bool;
+  eventsDEPRECATED @13 :List(OnroadEventDEPRECATED);
 }
 
 # ******* radar state @ 20hz *******
