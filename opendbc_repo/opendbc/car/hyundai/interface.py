@@ -89,7 +89,6 @@ class CarInterface(CarInterfaceBase):
     ret.openpilotLongitudinalControl = experimental_long and ret.experimentalLongitudinalAvailable
     ret.pcmCruise = not ret.openpilotLongitudinalControl
 
-    ret.stoppingControl = True
     ret.startingState = True
     ret.stoppingDecelRate = 0.3
     ret.steerActuatorDelay = 0.2

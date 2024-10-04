@@ -41,9 +41,9 @@ void ModelRenderer::draw(QPainter &painter, const QRect &surface_rect) {
     update_leads(radar_state, model.getPosition());
     const auto &lead_two = radar_state.getLeadTwo();
     if (lead_one.getStatus()) {
-      drawLead(painter, lead_two, lead_vertices[0], surface_rect, lead_radar[0]);
+      drawLead(painter, lead_one, lead_vertices[0], surface_rect, lead_radar[0]);
     }
-    if (lead_two.getStatus() && (std::abs(lead_one.getDRel() - lead_two.getDRel()) > 3.0)) {
+    if (lead_two.getStatus() && (std::abs(lead_one.getDRel() - lead_two.getDRel()) > 2.0)) {
       drawLead(painter, lead_two, lead_vertices[1], surface_rect, lead_radar[1]);
     }
   }

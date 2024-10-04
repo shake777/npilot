@@ -252,4 +252,9 @@ class CarSpecificEvents:
         elif not CS.cruiseState.enabled and CS_prev.cruiseState.enabled:
           events.add(EventName.cruiseOff)
 
+    # neokii
+    exState = CS.exState
+    if exState.slowingDownAlert:
+      events.add(EventName.slowingDownSpeed)
+
     return events

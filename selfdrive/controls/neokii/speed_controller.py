@@ -131,6 +131,13 @@ class SpeedController:
     self.slowing_down_alert = False
     self.slowing_down_sound_alert = False
 
+  def should_play_slowing_down(self, CS):
+    if CS.cruiseState.enabled:
+      if self.slowing_down_sound_alert:
+        self.slowing_down_sound_alert = False
+        return True
+    return False
+
   def inject_events(self, CS, events):
 
     if CS.cruiseState.enabled:
@@ -415,6 +422,7 @@ class SpeedController:
     exState.applyMaxSpeed = self.cruise_speed_kph
     exState.steerActuatorDelay = ntune_common_get('steerActuatorDelay')
     exState.longActuatorDelay = ntune_scc_get('longActuatorDelay')
+    exState.slowingDownAlert = self.should_play_slowing_down(CS)
 
   def bytes_to_str(self, obj):
     if isinstance(obj, bytes):
