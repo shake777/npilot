@@ -80,7 +80,6 @@ struct OnroadEvent @0xc4fa6047f024e718 {
     commIssueAvgFreq @44;
     tooDistracted @45;
     posenetInvalid @46;
-    soundsUnavailable @47;
     preLaneChangeLeft @48;
     preLaneChangeRight @49;
     laneChange @50;
@@ -130,6 +129,8 @@ struct OnroadEvent @0xc4fa6047f024e718 {
     slowingDownSpeed @93;
     cruiseOn @94;
     cruiseOff @95;
+
+    soundsUnavailableDEPRECATED @47;
   }
 }
 
@@ -2356,9 +2357,9 @@ struct NavInstruction {
   speedLimitSign @11 :SpeedLimitSign;
 
   allManeuvers @12 :List(Maneuver);
-  
+
   imageUrl @13 :Text;
-  
+
 
   struct Lane {
     directions @0 :List(Direction);
@@ -2564,7 +2565,7 @@ struct Event {
     customReserved7 @114 :Custom.CustomReserved7;
     customReserved8 @115 :Custom.CustomReserved8;
     customReserved9 @116 :Custom.CustomReserved9;
-    
+
     # neokii
     naviData @135 :NaviData;
     naviGps @136 :NaviGps;

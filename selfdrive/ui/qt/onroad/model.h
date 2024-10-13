@@ -20,16 +20,21 @@ private:
   void update_model(const cereal::ModelDataV2::Reader &model, const cereal::RadarState::LeadData::Reader &lead);
   void drawLaneLines(QPainter &painter);
   void drawPath(QPainter &painter, const cereal::ModelDataV2::Reader &model, int height);
+  void updatePathGradient(QLinearGradient &bg);
+  QColor blendColors(const QColor &start, const QColor &end, float t);
 
   bool longitudinal_control = false;
-  bool experimental_model = false;
-  float lane_line_probs[4];
-  float road_edge_stds[2];
+  bool experimental_mode = false;
+  float blend_factor = 1.0f;
+  bool prev_allow_throttle = false;
+  float lane_line_probs[4] = {};
+  float road_edge_stds[2] = {};
   QPolygonF track_vertices;
-  QPolygonF lane_line_vertices[4];
-  QPolygonF road_edge_vertices[2];
-  QPointF lead_vertices[2];
-  bool lead_radar[2] = {false, false};
+  QPolygonF lane_line_vertices[4] = {};
+  QPolygonF road_edge_vertices[2] = {};
+  QPointF lead_vertices[2] = {};
   Eigen::Matrix3f car_space_transform = Eigen::Matrix3f::Zero();
   QRectF clip_region;
+
+  bool lead_radar[2] = {false, false};
 };
