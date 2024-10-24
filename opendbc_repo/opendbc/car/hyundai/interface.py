@@ -98,7 +98,6 @@ class CarInterface(CarInterfaceBase):
     ret.vEgoStopping = 0.1
     ret.startAccel = 1.0
     ret.longitudinalActuatorDelay = 0.5
-    ret.radarTimeStep = 0.02
 
     # *** feature detection ***
     if ret.flags & HyundaiFlags.CANFD:
