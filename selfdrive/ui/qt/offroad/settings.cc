@@ -624,12 +624,12 @@ CommunityPanel::CommunityPanel(SettingsWindow *parent) : ListWidget(parent) {
       tr("Displays the driver camera when in reverse."),
       "../assets/img_driver_face_static.png",
     },
-    {
+    /*{
       "SendCarParamLogs",
       tr("Send car param logs (for debugging)"),
       tr(""),
       "../assets/icon_openpilot.png",
-    },
+    },*/
   };
 
   for (auto &[param, title, desc, icon] : toggle_defs) {

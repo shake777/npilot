@@ -84,8 +84,8 @@ class SpeedController:
     self.v_cruise_cluster_kph = V_CRUISE_UNSET
     self.v_cruise_kph_last = 0
 
-    if self.params.get_bool('SendCarParamLogs'):
-      threading.Thread(target=self._upload_log_thread, daemon=True).start()
+    #if self.params.get_bool('SendCarParamLogs'):
+    #  threading.Thread(target=self._upload_log_thread, daemon=True).start()
 
   def kph_to_clu(self, kph):
     return int(kph * CV.KPH_TO_MS * self.speed_conv_to_clu)
